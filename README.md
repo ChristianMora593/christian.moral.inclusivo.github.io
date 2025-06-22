@@ -13,9 +13,9 @@
 
   <h4>1. Estructura Semántica y Jerarquía</h4>
   <ul>
-    <li>Uso de etiquetas HTML5 semánticas (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>).</li>
-    <li>Jerarquía correcta de encabezados (<code>h1</code> a <code>h3</code>).</li>
-    <li>Roles ARIA para mejorar la navegación con lectores de pantalla (<code>aria-label</code>, <code>aria-labelledby</code>).</li>
+    <li>Uso de etiquetas HTML5 semánticas (header, nav, section, main, footer).</li>
+    <li>Jerarquía correcta de encabezados (h1, a h3).</li>
+    <li>Roles ARIA para mejorar la navegación con lectores de pantalla (aria-label, aria-labelledby).</li>
   </ul>
 
   <h4>2. Accesibilidad Visual</h4>
