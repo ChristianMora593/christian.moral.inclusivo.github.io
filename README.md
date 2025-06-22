@@ -4,10 +4,6 @@
 <p><strong>Ajustes en Diseño Inclusivo y accesibilidad Web:</strong></p>
 <div class="accessibility-report">
   <h2>Resumen de Mejoras Implementadas en el Portafolio para Diseño Inclusivo y Accesibilidad</h2>
-
-  <p><strong>Proyecto:</strong> Portafolio personal responsivo<br>
-  <strong>Enlace al prototipo original (Figma):</strong> <a href="https://www.figma.com/design/ILNilCvarr8vmy4dPgj9wJ/Laboratorio-3--Dise%C3%B1o-responsivo-de-portafolio-personal---Christian-Mora" target="_blank">Ver prototipo</a></p>
-
   <h3>🔍 Objetivo:</h3>
   <p>Transformar el diseño del portafolio en una página web funcional, responsiva y accesible, siguiendo las pautas WCAG 2.1 y principios de diseño inclusivo.</p>
 
@@ -79,22 +75,5 @@
 
   <hr>
 
-  <h3>📌 Próximos Pasos (Opcionales):</h3>
-  <ul>
-    <li>Añadir un <strong>selector de tema</strong> (claro/oscuro).</li>
-    <li>Implementar <strong>validación accesible</strong> en formulario.</li>
-    <li>Pruebas con usuarios reales (incluyendo personas con discapacidad).</li>
-  </ul>
-
-  <p><strong>Herramientas usadas para verificación:</strong><br>
-  <a href="https://wave.webaim.org/" target="_blank">WAVE</a><br>
-  Lighthouse (Chrome DevTools)<br>
-  NVDA / VoiceOver</p>
-
-  <hr>
-
   <p>✨ <strong>Impacto:</strong><br>
   El portafolio ahora no solo cumple con estándares técnicos, sino que <strong>prioriza la inclusión</strong>, asegurando que todos los usuarios, sin importar sus capacidades, puedan acceder al contenido sin barreras.</p>
-
-  <p><strong>¿Preguntas o sugerencias?</strong> ¡Estoy abierto a feedback para seguir mejorando! 🚀</p>
-</div>
