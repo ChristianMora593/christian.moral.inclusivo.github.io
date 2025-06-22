@@ -21,24 +21,24 @@
   <h4>2. Accesibilidad Visual</h4>
   <ul>
     <li><strong>Contraste adecuado</strong> entre texto/fondo (cumple WCAG AA).</li>
-    <li>Texto adaptable (tamaños relativos en <code>rem</code> y <code>em</code>).</li>
-    <li>Soporte para <code>prefers-reduced-motion</code> (reduce animaciones).</li>
-    <li>Modo alto contraste (<code>prefers-contrast: more</code>).</li>
+    <li>Texto adaptable (tamaños relativos en rem y em).</li>
+    <li>Soporte para prefers-reduced-motion (reduce animaciones).</li>
+    <li>Modo alto contraste (prefers-contrast: more).</li>
   </ul>
 
   <h4>3. Navegación y Usabilidad</h4>
   <ul>
-    <li><strong>Enfoque visible</strong> para navegación por teclado (<code>:focus-visible</code>).</li>
+    <li><strong>Enfoque visible</strong> para navegación por teclado (:focus-visible).</li>
     <li><strong>"Skip link"</strong> para saltar al contenido principal.</li>
     <li>Botones y enlaces con descripciones claras (evitando "clic aquí").</li>
-    <li>Atributos <code>alt</code> descriptivos en imágenes y <code>aria-label</code> en iconos.</li>
+    <li>Atributos alt descriptivos en imágenes y aria-label en iconos.</li>
   </ul>
 
   <h4>4. Formulario Accesible</h4>
   <ul>
-    <li>Etiquetas (<code>&lt;label&gt;</code>) asociadas a campos.</li>
-    <li>Indicadores de campos obligatorios (<code>aria-required</code>).</li>
-    <li>Autocompletado (<code>autocomplete</code>) para nombres, correos, etc.</li>
+    <li>Etiquetas (&lt;label&gt;) asociadas a campos.</li>
+    <li>Indicadores de campos obligatorios (aria-required).</li>
+    <li>Autocompletado (autocomplete) para nombres, correos, etc.</li>
   </ul>
 
   <h4>5. Diseño Inclusivo</h4>
@@ -50,7 +50,7 @@
 
   <h4>6. Optimizaciones Técnicas</h4>
   <ul>
-    <li>Carga diferida de imágenes (<code>loading="lazy"</code>).</li>
+    <li>Carga diferida de imágenes (loading="lazy").</li>
     <li>Fuentes de Google accesibles (legibles en todos los tamaños).</li>
     <li>Compatibilidad con lectores de pantalla (NVDA, VoiceOver).</li>
   </ul>
@@ -68,9 +68,9 @@
   <p><strong>Ejemplo de mejora clave:</strong><br>
   <strong>Sección "Proyectos":</strong></p>
   <ul>
-    <li>Tarjetas con <code>tabindex="0"</code> para navegación por teclado.</li>
-    <li>Texto alternativo en imágenes (<code>alt="Captura del proyecto X mostrando..."</code>).</li>
-    <li>Botones con igual tamaño y etiquetas ARIA (<code>aria-label="Ver demo de..."</code>).</li>
+    <li>Tarjetas con tabindex="0" para navegación por teclado.</li>
+    <li>Texto alternativo en imágenes (alt="Captura del proyecto X mostrando...").</li>
+
   </ul>
 
   <hr>
