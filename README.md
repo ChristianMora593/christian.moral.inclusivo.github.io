@@ -375,9 +375,10 @@ function createControls() {
     <li>Aparecerá el mapa de calor mostrando dónde miraste más</li>
         
   <hr>
-
+<h4>Calibración</h4>
   <img width="1914" height="1016" alt="img3" src="https://github.com/user-attachments/assets/9c2db8b4-e49b-4f30-84f8-3d8c34ecfb85" />
-   
+
+<h4>Uso de mejora de Eye-Tracking</h4>
   <img width="1918" height="1020" alt="img1" src="https://github.com/user-attachments/assets/28eeb6d6-b501-4c5f-894a-26e82beabe4a" />
 
   
