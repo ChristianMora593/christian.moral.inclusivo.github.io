@@ -375,6 +375,9 @@ function createControls() {
     <li>Aparecerá el mapa de calor mostrando dónde miraste más</li>
         
   <hr>
+
+
+  
   
   <p>✨ <strong>Impacto:</strong><br>
   El portafolio ahora no solo cumple con estándares técnicos, sino que <strong>prioriza la inclusión</strong>, asegurando que todos los usuarios, sin importar sus capacidades, puedan acceder al contenido sin barreras.</p>
