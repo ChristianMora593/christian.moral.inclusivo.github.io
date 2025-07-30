@@ -376,7 +376,7 @@ function createControls() {
         
   <hr>
 
-
+<img src="images/img3.jpg" alt="Imagen de inicio de detección" 
   
   
   <p>✨ <strong>Impacto:</strong><br>
