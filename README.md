@@ -376,8 +376,10 @@ function createControls() {
         
   <hr>
 
-<img src="images/img3.jpg" alt="Imagen de inicio de detección" 
-  
+  <img width="1914" height="1016" alt="img3" src="https://github.com/user-attachments/assets/9c2db8b4-e49b-4f30-84f8-3d8c34ecfb85" />
+   
+  <img width="1918" height="1020" alt="img1" src="https://github.com/user-attachments/assets/28eeb6d6-b501-4c5f-894a-26e82beabe4a" />
+
   
   <p>✨ <strong>Impacto:</strong><br>
   El portafolio ahora no solo cumple con estándares técnicos, sino que <strong>prioriza la inclusión</strong>, asegurando que todos los usuarios, sin importar sus capacidades, puedan acceder al contenido sin barreras.</p>
