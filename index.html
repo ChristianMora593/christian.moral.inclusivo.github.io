@@ -10,8 +10,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- WebGazer.js para seguimiento ocular -->
+    <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+    <!-- Heatmap.js para visualización del mapa de calor -->
+    <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.5/build/heatmap.min.js"></script>
+    <!-- Estilos CSS para el seguimiento ocular -->
+    <style>
+        /* Estilos para el botón de control */
+        #eyeTrackingControls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #toggleTracking {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        #toggleTracking:hover {
+            background-color: #45a049;
+        }
+        
+        #toggleTracking.stop {
+            background-color: #f44336;
+        }
+        
+        #toggleTracking.stop:hover {
+            background-color: #da190b;
+        }
+        
+        /* Contenedor para el mapa de calor */
+        #heatmapContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+        
+        /* Indicador de calibración */
+        #calibrationDot {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 10001;
+            display: none;
+        }
+        
+        /* Mensaje de estado */
+        #statusMessage {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        /* Botón para limpiar el mapa de calor */
+        #clearHeatmap {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: none;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        #clearHeatmap:hover {
+            background-color: #e68900;
+        }
+    </style>
 </head>
 <body>
+    <!-- Panel de control del seguimiento ocular -->
+    <div id="eyeTrackingControls">
+        <button id="toggleTracking">Iniciar Seguimiento Ocular</button>
+        <button id="clearHeatmap">Limpiar Mapa de Calor</button>
+        <div id="statusMessage">Listo para iniciar</div>
+    </div>
+    
+    <!-- Contenedor para el mapa de calor -->
+    <div id="heatmapContainer"></div>
+    
+    <!-- Punto de calibración -->
+    <div id="calibrationDot"></div>
+
     <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     
     <header class="header">
@@ -341,5 +449,166 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Variables globales
+        let isTracking = false;
+        let heatmapInstance = null;
+        let gazeData = [];
+        let calibrationPoints = [];
+        
+        // Configuración inicial de WebGazer
+        window.addEventListener('load', function() {
+            // Configurar WebGazer
+            webgazer.params.showVideoPreview = true;
+            webgazer.params.showPredictionPoints = true;
+            
+            // Preparar el mapa de calor
+            setupHeatmap();
+            
+            // Configurar botones
+            setupButtons();
+        });
+        
+        // Función para configurar el mapa de calor
+        function setupHeatmap() {
+            heatmapInstance = h337.create({
+                container: document.getElementById('heatmapContainer'),
+                radius: 40,
+                maxOpacity: 0.6,
+                minOpacity: 0,
+                blur: 0.75
+            });
+        }
+        
+        // Función para configurar los botones
+        function setupButtons() {
+            const toggleButton = document.getElementById('toggleTracking');
+            const clearButton = document.getElementById('clearHeatmap');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            toggleButton.addEventListener('click', function() {
+                if (!isTracking) {
+                    startTracking();
+                } else {
+                    stopTracking();
+                }
+            });
+            
+            clearButton.addEventListener('click', function() {
+                clearHeatmap();
+            });
+        }
+        
+        // Función para iniciar el seguimiento
+        function startTracking() {
+            const toggleButton = document.getElementById('toggleTracking');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            statusMessage.textContent = 'Iniciando cámara y calibración...';
+            toggleButton.disabled = true;
+            
+            // Iniciar WebGazer
+            webgazer.setGazeListener(function(data, elapsedTime) {
+                if (data == null) return;
+                
+                // Guardar datos de la mirada
+                gazeData.push({
+                    x: data.x,
+                    y: data.y,
+                    value: 1
+                });
+                
+                // Actualizar el mapa de calor en tiempo real (opcional)
+                if (gazeData.length % 10 === 0) {
+                    updateHeatmap();
+                }
+            }).begin();
+            
+            // Configurar estado
+            isTracking = true;
+            toggleButton.textContent = 'Detener Seguimiento';
+            toggleButton.className = 'stop';
+            toggleButton.disabled = false;
+            statusMessage.textContent = 'Seguimiento activo. Mira la pantalla normalmente.';
+            
+            // Ocultar el video de preview después de la calibración
+            setTimeout(() => {
+                webgazer.showPredictionPoints(false);
+                webgazer.showVideoPreview(false);
+            }, 5000);
+        }
+        
+        // Función para detener el seguimiento
+        function stopTracking() {
+            const toggleButton = document.getElementById('toggleTracking');
+            const statusMessage = document.getElementById('statusMessage');
+            const clearButton = document.getElementById('clearHeatmap');
+            
+            // Detener WebGazer
+            webgazer.pause();
+            webgazer.showPredictionPoints(false);
+            webgazer.showVideoPreview(false);
+            
+            // Mostrar el mapa de calor final
+            showFinalHeatmap();
+            
+            // Actualizar estado
+            isTracking = false;
+            toggleButton.textContent = 'Iniciar Seguimiento Ocular';
+            toggleButton.className = '';
+            statusMessage.textContent = 'Seguimiento detenido. Mapa de calor visible.';
+            clearButton.style.display = 'inline-block';
+        }
+        
+        // Función para actualizar el mapa de calor
+        function updateHeatmap() {
+            if (gazeData.length > 0) {
+                heatmapInstance.setData({
+                    max: 20,
+                    data: gazeData
+                });
+            }
+        }
+        
+        // Función para mostrar el mapa de calor final
+        function showFinalHeatmap() {
+            const heatmapContainer = document.getElementById('heatmapContainer');
+            heatmapContainer.style.display = 'block';
+            
+            // Actualizar con todos los datos recolectados
+            updateHeatmap();
+        }
+        
+        // Función para limpiar el mapa de calor
+        function clearHeatmap() {
+            const heatmapContainer = document.getElementById('heatmapContainer');
+            const clearButton = document.getElementById('clearHeatmap');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // Limpiar datos
+            gazeData = [];
+            heatmapInstance.setData({ max: 0, data: [] });
+            
+            // Ocultar elementos
+            heatmapContainer.style.display = 'none';
+            clearButton.style.display = 'none';
+            statusMessage.textContent = 'Mapa de calor limpiado. Listo para nueva sesión.';
+        }
+        
+        // Función de calibración mejorada
+        function improveCalibration() {
+            // Puntos de calibración en la pantalla
+            const calibrationPositions = [
+                {x: 10, y: 10},
+                {x: window.innerWidth - 10, y: 10},
+                {x: window.innerWidth / 2, y: window.innerHeight / 2},
+                {x: 10, y: window.innerHeight - 10},
+                {x: window.innerWidth - 10, y: window.innerHeight - 10}
+            ];
+            
+            // Aquí podrías implementar una rutina de calibración más elaborada
+            // Por ahora, WebGazer se calibra automáticamente con los clics del usuario
+        }
+    </script>
 </body>
 </html>
